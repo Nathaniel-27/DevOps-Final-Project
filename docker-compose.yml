@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   docs:
-    images: kobucom/pandoc:local1
+    images: kobucom/pandoc
     ports:
       -  "8081-8081"
 
