@@ -1,6 +1,35 @@
-version: '3'
+version: '3.8'
+
 services:
-  web:
-    image: nginx
+
+  docs:
+    images: kobucom/pandoc:local1
     ports:
-      - "80:80"
+      -  "8081-8081"
+
+  db:
+    image: mysql:8.0
+    environment:
+      MY_SQL_ROOT_PASSWORD: put password here
+      MY_SQL_DATABASE: joomladb
+      MY_SQL_USER: joomlauser
+      MY_SQL_PASSWORD: put the password here
+    volumes:
+      -db_data:/var/lib/mysql
+
+  joomla:
+    image: joomla
+    ports:
+      - "8090:80"
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_USER: joomlauser
+      JOOMLA_DB_USER: joomlapassword
+      JOOMLA_DB_NAME: joomladb
+    depends_on:
+      - db
+
+voulmes:
+  db_data: 
+
+  
