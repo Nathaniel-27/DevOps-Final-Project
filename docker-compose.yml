@@ -24,7 +24,6 @@ services:
     environment:
       JOOMLA_DB_HOST: db
       JOOMLA_DB_USER: joomlauser
-      JOOMLA_DB_USER: joomlapassword
       JOOMLA_DB_NAME: joomladb
     depends_on:
       - db
