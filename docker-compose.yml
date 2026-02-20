@@ -3,19 +3,19 @@ version: '3.8'
 services:
 
   docs:
-    images: kobucom/pandoc
+    image: kobucom/pandoc:local1
     ports:
-      -  "8081-8081"
+      -  "8081:8081"
 
   db:
     image: mysql:8.0
     environment:
-      MY_SQL_ROOT_PASSWORD: put password here
-      MY_SQL_DATABASE: joomladb
-      MY_SQL_USER: joomlauser
-      MY_SQL_PASSWORD: put the password here
+      MYSQL_ROOT_PASSWORD: put password here
+      MYSQL_DATABASE: joomladb
+      MYSQL_USER: joomlauser
+      MYSQL_PASSWORD: put the password here
     volumes:
-      -db_data:/var/lib/mysql
+      -  db_data:/var/lib/mysql
 
   joomla:
     image: joomla
@@ -24,11 +24,12 @@ services:
     environment:
       JOOMLA_DB_HOST: db
       JOOMLA_DB_USER: joomlauser
+      JOOMLA_DB_PASSWORD: Put password here
       JOOMLA_DB_NAME: joomladb
     depends_on:
       - db
 
-voulmes:
+volumes:
   db_data: 
 
   
