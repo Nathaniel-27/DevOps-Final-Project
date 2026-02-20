@@ -1,35 +1,53 @@
-version: '3.8'
-
 services:
-
-  docs:
+  documentation:
     image: kobucom/pandoc:local1
+    container_name: doc-final-project
     ports:
       -  "8081:8081"
-
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: put password here
-      MYSQL_DATABASE: joomladb
-      MYSQL_USER: joomlauser
-      MYSQL_PASSWORD: put the password here
     volumes:
-      -  db_data:/var/lib/mysql
+    - /c/Users/Owner/OneDrive - Western Wisconsin Technical College/Desktop/DevOps-Final-Project:/usr/local/apache2/htdocs
+    networks:
+    - final-network
+    restart: 'unless-stopped'
 
-  joomla:
+  database:
+    image: mysql:8.0
+    container_name: "database-final-project"
+    environment:
+      MYSQL_ROOT_PASSWORD: SQLpassword27
+      MYSQL_DATABASE: cms
+    volumes:
+      -  mysql-final-data:/var/lib/mysql
+    networks:
+    -  final-network
+    restart: 'unless-stopped'
+
+  cms:
     image: joomla
+    container_name: "joomla-final-project"
     ports:
       - "8090:80"
     environment:
-      JOOMLA_DB_HOST: db
-      JOOMLA_DB_USER: joomlauser
-      JOOMLA_DB_PASSWORD: Put password here
-      JOOMLA_DB_NAME: joomladb
+      JOOMLA_DB_HOST: database
+      JOOMLA_DB_USER: root
+      JOOMLA_DB_PASSWORD: "Joomla57!!"
+      JOOMLA_DB_NAME: cms
+    volumes:
+    - web-final-data:/var/www/html
     depends_on:
-      - db
+      - database
+    networks:
+    - final-network
+    restart: 'unless-stopped'
+
+networks:
+    final-network:
+        driver: bridge 
 
 volumes:
-  db_data: 
+  mysql-final-data:
+      driver: "local"
+  web-final-data:
+      driver: "local"
 
   
