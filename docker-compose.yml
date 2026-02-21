@@ -1,14 +1,15 @@
 services:
   documentation:
-    image: kobucom/pandoc:local1
+    image: squidfunk/mkdocs-material
     container_name: doc-final-project
     ports:
-      - "8081:80"
+      - "8081:8000"
     volumes:
-      - /home/ec2-user/DevOps-Final-Project:/usr/local/apache2/htdocs
+      - /home/ec2-user/DevOps-Final-Project:/docs
     networks:
       - final-network
     restart: 'unless-stopped'
+    command: serve --dev-addr=0.0.0.0:8000
 
   database:
     image: mysql:8.0
