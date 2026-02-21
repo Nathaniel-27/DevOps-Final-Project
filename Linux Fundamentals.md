@@ -1,5 +1,6 @@
 # What I learned about Linux Fundamentals
  The terminal in linux is where you will be doing some if not most of your work so it is important to really understand and memorize basic commands if you are going to be working in the dev ops field or with linux a lot.
+ Linux is the back bone of devops and is what is used for most of there applications in the feild so being able to master commands is a imporant skills
  The shell is important becuase it allows you to type and run the commands in order to work with Linux.
 
 # Linux basic commands
